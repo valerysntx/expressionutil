@@ -7,6 +7,7 @@ using System.Reflection;
 namespace System.Web.Mvc.ExpressionUtil
 { 
   using ExpressionFingerprint;
+  using Constant;
 
   //  Expression Compiler w. Caching
   public delegate TValue Hoisted<TModel, TValue>( TModel model, ICollection<WeakReference> capturedConstants );
@@ -42,7 +43,7 @@ namespace System.Web.Mvc.ExpressionUtil
       AddInt32(num);
     }
 
-    public void AddFingerprint( ExpressionFingerprint fingerprint )
+    public void AddFingerprint( AbstractExpressionFingerprint fingerprint )
     {
       if (fingerprint != null)
       {
@@ -96,7 +97,7 @@ namespace System.Web.Mvc.ExpressionUtil
   }
 
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-  public class ConditionalExpressionFingerprint : ExpressionFingerprint
+  public class ConditionalExpressionFingerprint : AbstractExpressionFingerprint
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
   {
     public ConditionalExpressionFingerprint( ExpressionType nodeType, Type type ) : base(nodeType, type)
@@ -255,7 +256,7 @@ namespace System.Web.Mvc.ExpressionUtil
 
   public class ExpressionFingerprintChain : IEquatable<ExpressionFingerprintChain>
   {
-    public readonly List<ExpressionFingerprint> Elements = new List<ExpressionFingerprint>();
+    public readonly List<AbstractExpressionFingerprint> Elements = new List<AbstractExpressionFingerprint>();
 
     public ExpressionFingerprintChain()
     {
@@ -289,7 +290,7 @@ namespace System.Web.Mvc.ExpressionUtil
     public override int GetHashCode()
     {
       HashCodeCombiner hashCodeCombiner = new HashCodeCombiner();
-      Elements.ForEach(new Action<ExpressionFingerprint>(hashCodeCombiner.AddFingerprint));
+      Elements.ForEach(new Action<AbstractExpressionFingerprint>(hashCodeCombiner.AddFingerprint));
       return hashCodeCombiner.CombinedHash;
     }
   }
