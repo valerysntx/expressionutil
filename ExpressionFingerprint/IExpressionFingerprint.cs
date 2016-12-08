@@ -1,5 +1,4 @@
-﻿
-namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint
+﻿namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint
 {
   using System.Linq.Expressions;
 
@@ -11,7 +10,7 @@ namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint
     ExpressionType NodeType { get; }
     Type Type { get; }
 
-    bool Equals( object obj );
+    bool Equals(object obj);
     int GetHashCode();
   }
 }

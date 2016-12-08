@@ -6,6 +6,6 @@ namespace System.Web.Mvc.ExpressionUtil
   {
     MethodInfo Method { get; }
 
-    bool Equals( object obj );
+    bool Equals(object obj);
   }
 }

@@ -1,4 +1,5 @@
-﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -149,6 +150,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConditionalExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\Binary\BinaryExpressionFingerprint.cs" />
     <Compile Include="CachedExpressionCompiler.cs" />
     <Compile Include="ExpressionFingerprint\Conditional\ConditionalExpressionFingerprint.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Hoisted_TModel, TValue_.cs" />
     <Compile Include="HoistingExpressionVisitor_TIn, TOut_.cs" />
+    <Compile Include="IHashCodeCombiner.cs" />
     <Compile Include="IndexExpressionFingerprint.cs" />
     <Compile Include="LambdaExpressionFingerprint.cs" />
     <Compile Include="MemberExpressionFingerprint.cs" />

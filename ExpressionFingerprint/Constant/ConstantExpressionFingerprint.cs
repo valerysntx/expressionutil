@@ -5,16 +5,15 @@ namespace System.Web.Mvc.ExpressionUtil
 {
   using ExpressionFingerprint;
 
-  namespace Constant {
-
+  namespace Constant
+  {
     public class ConstantExpressionFingerprint : AbstractExpressionFingerprint
     {
-
-      public ConstantExpressionFingerprint( ExpressionType nodeType, Type type ) : base(nodeType, type)
+      public ConstantExpressionFingerprint(ExpressionType nodeType, Type type) : base(nodeType, type)
       {
       }
 
-      public override bool Equals( object obj )
+      public override bool Equals(object obj)
       {
         ConstantExpressionFingerprint constantExpressionFingerprint = obj as ConstantExpressionFingerprint;
         if (constantExpressionFingerprint == null)
@@ -24,7 +23,7 @@ namespace System.Web.Mvc.ExpressionUtil
         return base.Equals(constantExpressionFingerprint);
       }
 
-      internal override void AddToHashCodeCombiner( HashCodeCombiner combiner )
+      internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)
       {
         base.AddToHashCodeCombiner(combiner);
       }
