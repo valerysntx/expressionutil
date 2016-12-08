@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.Binary;
 
 namespace System.Web.Mvc.ExpressionUtil
 { 
@@ -12,108 +12,7 @@ namespace System.Web.Mvc.ExpressionUtil
   //  Expression Compiler w. Caching
   public delegate TValue Hoisted<TModel, TValue>( TModel model, ICollection<WeakReference> capturedConstants );
 
-  public class HashCodeCombiner
-  {
-    private long _combinedHash64 = (long) 5381;
-
-    public int CombinedHash
-    {
-      get {
-        return _combinedHash64.GetHashCode();
-      }
-    }
-
-    public HashCodeCombiner()
-    {
-    }
-
-    public void AddEnumerable( IEnumerable e )
-    {
-      if (e == null)
-      {
-        AddInt32(0);
-        return;
-      }
-      int num = 0;
-      foreach (object obj in e)
-      {
-        AddObject(obj);
-        num++;
-      }
-      AddInt32(num);
-    }
-
-    public void AddFingerprint( AbstractExpressionFingerprint fingerprint )
-    {
-      if (fingerprint != null)
-      {
-        fingerprint.AddToHashCodeCombiner(this);
-        return;
-      }
-      AddInt32(0);
-    }
-
-    public void AddInt32( int i )
-    {
-      _combinedHash64 = (_combinedHash64 << 5) + _combinedHash64 ^ (long) i;
-    }
-
-    public void AddObject( object o )
-    {
-      AddInt32((o != null ? o.GetHashCode() : 0));
-    }
-  }
-
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-  public class BinaryExpressionFingerprint : AbstractExpressionFingerprint
-#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-  {
-    public MethodInfo Method
-    {
-      get;
-      private set;
-    }
-
-    public BinaryExpressionFingerprint( ExpressionType nodeType, Type type, MethodInfo method ) : base(nodeType, type)
-    {
-      Method = method;
-    }
-
-    internal override void AddToHashCodeCombiner( HashCodeCombiner combiner )
-    {
-      combiner.AddObject(Method);
-      base.AddToHashCodeCombiner(combiner);
-    }
-
-    public override bool Equals( object obj )
-    {
-      BinaryExpressionFingerprint binaryExpressionFingerprint = obj as BinaryExpressionFingerprint;
-      if (binaryExpressionFingerprint == null || !object.Equals(Method, binaryExpressionFingerprint.Method))
-      {
-        return false;
-      }
-      return base.Equals(binaryExpressionFingerprint);
-    }
-  }
-
-#pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-  public class ConditionalExpressionFingerprint : AbstractExpressionFingerprint
-#pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-  {
-    public ConditionalExpressionFingerprint( ExpressionType nodeType, Type type ) : base(nodeType, type)
-    {
-    }
-
-    public override bool Equals( object obj )
-    {
-      ConditionalExpressionFingerprint conditionalExpressionFingerprint = obj as ConditionalExpressionFingerprint;
-      if (conditionalExpressionFingerprint == null)
-      {
-        return false;
-      }
-      return base.Equals(conditionalExpressionFingerprint);
-    }
-  }
 
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
   public class DefaultExpressionFingerprint : AbstractExpressionFingerprint
@@ -251,47 +150,6 @@ namespace System.Web.Mvc.ExpressionUtil
       hoistingExpressionVisitor._numConstantsProcessed = num + 1;
       expressionArray[0] = Expression.Constant(num1);
       return Expression.Convert(Expression.Property(parameterExpression, "Item", expressionArray), node.Type);
-    }
-  }
-
-  public class ExpressionFingerprintChain : IEquatable<ExpressionFingerprintChain>
-  {
-    public readonly List<AbstractExpressionFingerprint> Elements = new List<AbstractExpressionFingerprint>();
-
-    public ExpressionFingerprintChain()
-    {
-    }
-
-    public bool Equals( ExpressionFingerprintChain other )
-    {
-      if (other == null)
-      {
-        return false;
-      }
-      if (Elements.Count != other.Elements.Count)
-      {
-        return false;
-      }
-      for (int i = 0; i < Elements.Count; i++)
-      {
-        if (!object.Equals(Elements[i], other.Elements[i]))
-        {
-          return false;
-        }
-      }
-      return true;
-    }
-
-    public override bool Equals( object obj )
-    {
-      return Equals(obj as ExpressionFingerprintChain);
-    }
-
-    public override int GetHashCode()
-    {
-      HashCodeCombiner hashCodeCombiner = new HashCodeCombiner();
-      Elements.ForEach(new Action<AbstractExpressionFingerprint>(hashCodeCombiner.AddFingerprint));
-      return hashCodeCombiner.CombinedHash;
     }
   }
 

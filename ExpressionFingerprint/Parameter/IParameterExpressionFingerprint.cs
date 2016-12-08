@@ -4,6 +4,6 @@
   {
     int ParameterIndex { get; }
 
-    bool Equals( object obj );
+    bool Equals(object obj);
   }
 }
