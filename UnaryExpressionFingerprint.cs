@@ -2,11 +2,12 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint;
 
 namespace System.Web.Mvc.ExpressionUtil
 {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
-	internal sealed class UnaryExpressionFingerprint : ExpressionFingerprint
+	internal sealed class UnaryExpressionFingerprint : AbstractExpressionFingerprint
 #pragma warning restore CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 	{
 		public MethodInfo Method
