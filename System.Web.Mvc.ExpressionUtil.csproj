@@ -160,6 +160,7 @@
     <Compile Include="ExpressionFingerprint\MethodCall\IMethodCallExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\Parameter\IParameterExpressionFingerprint.cs" />
     <Compile Include="FingerprintingExpressionVisitor.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Hoisted_TModel, TValue_.cs" />
     <Compile Include="HoistingExpressionVisitor_TIn, TOut_.cs" />
