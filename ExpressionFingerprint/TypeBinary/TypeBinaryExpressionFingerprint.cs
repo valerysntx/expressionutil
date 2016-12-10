@@ -1,9 +1,7 @@
-using System;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
-using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.ExpressionFingerprint;
 
-namespace System.Web.Mvc.ExpressionUtil
+namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.TypeBinary
 {
 #pragma warning disable CS0659 // Type overrides Object.Equals(object o) but does not override Object.GetHashCode()
 	internal sealed class TypeBinaryExpressionFingerprint : AbstractExpressionFingerprint
@@ -18,12 +16,6 @@ namespace System.Web.Mvc.ExpressionUtil
 		public TypeBinaryExpressionFingerprint(ExpressionType nodeType, Type type, Type typeOperand ) : base(nodeType, type)
 		{
       TypeOperand = typeOperand;
-		}
-
-		internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)
-		{
-			combiner.AddObject(TypeOperand);
-			base.AddToHashCodeCombiner(combiner);
 		}
 
 		public override bool Equals(object obj)

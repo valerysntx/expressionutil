@@ -1,37 +1,31 @@
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.ExpressionFingerprint;
 
-namespace System.Web.Mvc.ExpressionUtil
+namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.MethodCall
 {
   public sealed class MethodCallExpressionFingerprint : AbstractExpressionFingerprint, IMethodCallExpressionFingerprint
   {
-    public MethodInfo Method { get; private set; }
-
     public MethodCallExpressionFingerprint(ExpressionType nodeType, Type type, MethodInfo method) : base(nodeType, type)
     {
       Method = method;
     }
 
-    internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)
+    public MethodInfo Method { get; }
+
+    public override bool Equals(object obj)
     {
-      combiner.AddObject(Method);
-      base.AddToHashCodeCombiner(combiner);
+      var methodCallExpressionFingerprint = obj as MethodCallExpressionFingerprint;
+      if (methodCallExpressionFingerprint == null || !Equals(Method, methodCallExpressionFingerprint.Method))
+      {
+        return false;
+      }
+      return Equals(methodCallExpressionFingerprint);
     }
 
     public override int GetHashCode()
     {
       return base.GetHashCode();
-    }
-
-    public override bool Equals(object obj)
-    {
-      MethodCallExpressionFingerprint methodCallExpressionFingerprint = obj as MethodCallExpressionFingerprint;
-      if (methodCallExpressionFingerprint == null || !object.Equals(Method, methodCallExpressionFingerprint.Method))
-      {
-        return false;
-      }
-      return base.Equals(methodCallExpressionFingerprint);
     }
   }
 }

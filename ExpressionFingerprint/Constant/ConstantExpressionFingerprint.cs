@@ -1,10 +1,8 @@
-using System;
 using System.Linq.Expressions;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.ExpressionFingerprint;
 
-namespace System.Web.Mvc.ExpressionUtil
+namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.Constant
 {
-  using ExpressionFingerprint;
-
   namespace Constant
   {
     public class ConstantExpressionFingerprint : AbstractExpressionFingerprint
@@ -15,17 +13,12 @@ namespace System.Web.Mvc.ExpressionUtil
 
       public override bool Equals(object obj)
       {
-        ConstantExpressionFingerprint constantExpressionFingerprint = obj as ConstantExpressionFingerprint;
+        var constantExpressionFingerprint = obj as ConstantExpressionFingerprint;
         if (constantExpressionFingerprint == null)
         {
           return false;
         }
-        return base.Equals(constantExpressionFingerprint);
-      }
-
-      internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)
-      {
-        base.AddToHashCodeCombiner(combiner);
+        return Equals(constantExpressionFingerprint);
       }
 
       public override int GetHashCode()

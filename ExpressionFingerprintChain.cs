@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.ExpressionFingerprint;
 
 namespace System.Web.Mvc.ExpressionUtil
 {

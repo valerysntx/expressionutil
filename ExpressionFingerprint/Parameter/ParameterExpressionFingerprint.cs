@@ -1,6 +1,6 @@
 using System.Linq.Expressions;
 
-namespace System.Web.Mvc.ExpressionUtil
+namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.Parameter
 {
   using ExpressionFingerprint;
 
@@ -13,12 +13,6 @@ namespace System.Web.Mvc.ExpressionUtil
     public ParameterExpressionFingerprint(ExpressionType nodeType, Type type, int parameterIndex) : base(nodeType, type)
     {
       ParameterIndex = parameterIndex;
-    }
-
-    internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)
-    {
-      combiner.AddInt32(ParameterIndex);
-      base.AddToHashCodeCombiner(combiner);
     }
 
     public override bool Equals(object obj)
