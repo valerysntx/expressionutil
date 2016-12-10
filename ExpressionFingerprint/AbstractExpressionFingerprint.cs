@@ -1,16 +1,14 @@
-﻿namespace System.Web.Mvc.ExpressionUtil
-{
-  using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
+namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint
+{
   namespace ExpressionFingerprint
   {
-    using System.Web.Mvc.ExpressionUtil;
-
     public abstract partial class AbstractExpressionFingerprint : IExpressionFingerprint
     {
-      public ExpressionType NodeType { get; private set; }
+      public ExpressionType NodeType { get; }
 
-      public Type Type { get; private set; }
+      public Type Type { get; }
 
       /// <summary>
       /// Restrict cast 
@@ -34,7 +32,7 @@
       /// //TODO: refactor
       /// </summary>
       /// <param name="combiner"></param>
-      internal virtual void AddToHashCodeCombiner(HashCodeCombiner combiner)
+      public virtual void AddToHashCodeCombiner(IHashCodeCombiner combiner)
       {
         combiner.AddInt32((int) NodeType);
         combiner.AddObject(Type);
@@ -46,6 +44,7 @@
         {
           return false;
         }
+        // ReSharper disable once CheckForReferenceEqualityInstead.2
         return Equals(Type, other.Type);
       }
 
@@ -56,10 +55,11 @@
 
       public override int GetHashCode()
       {
-        HashCodeCombiner hashCodeCombiner = new HashCodeCombiner();
+        var hashCodeCombiner = new HashCodeCombiner();
         AddToHashCodeCombiner(hashCodeCombiner);
         return hashCodeCombiner.CombinedHash;
       }
+
     }
   }
 }

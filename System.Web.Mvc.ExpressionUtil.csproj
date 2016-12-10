@@ -51,6 +51,14 @@
       <HintPath>packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="StructureMap, Version=4.3.0.449, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\StructureMap.4.4.0\lib\net45\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap.Microsoft.DependencyInjection, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\StructureMap.Microsoft.DependencyInjection.1.1.0\lib\net451\StructureMap.Microsoft.DependencyInjection.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.AppContext.4.3.0\lib\net46\System.AppContext.dll</HintPath>
@@ -150,13 +158,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConditionalExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\Conditional\ConditionalExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\Binary\BinaryExpressionFingerprint.cs" />
     <Compile Include="CachedExpressionCompiler.cs" />
-    <Compile Include="ExpressionFingerprint\Conditional\ConditionalExpressionFingerprint.cs" />
+    <None Include="ExpressionFingerprint\Conditional\ConditionalExpressionFingerprint.c_" />
     <Compile Include="ExpressionFingerprint\Constant\ConstantExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\Default\DefaultExpressionFingerprint.cs" />
-    <Compile Include="ExpressionFingerprint\ExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\AbstractExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprintChain.cs" />
     <Compile Include="ExpressionFingerprint\IExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\MethodCall\IMethodCallExpressionFingerprint.cs" />
@@ -165,18 +173,20 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Hoisted_TModel, TValue_.cs" />
+    <Compile Include="HoistingExpressionVisitor.cs" />
     <Compile Include="HoistingExpressionVisitor_TIn, TOut_.cs" />
     <Compile Include="IHashCodeCombiner.cs" />
-    <Compile Include="IndexExpressionFingerprint.cs" />
-    <Compile Include="LambdaExpressionFingerprint.cs" />
-    <Compile Include="MemberExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\Lambda\LambdaExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\Member\MemberExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\MethodCall\MethodCallExpressionFingerprint.cs" />
     <Compile Include="ExpressionFingerprint\Parameter\ParameterExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\Index\IndexExpressionFingerprint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TypeBinaryExpressionFingerprint.cs" />
-    <Compile Include="UnaryExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\TypeBinary\TypeBinaryExpressionFingerprint.cs" />
+    <Compile Include="ExpressionFingerprint\Unary\UnaryExpressionFingerprint.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="System.Web.Mvc.ExpressionUtil.snk" />
   </ItemGroup>

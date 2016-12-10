@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.ExpressionFingerprint;
 
 namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.Binary
 {
@@ -8,24 +9,16 @@ namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint.Binary
   /// </summary>
   public class BinaryExpressionFingerprint : AbstractExpressionFingerprint, IEquatable<BinaryExpressionFingerprint>
   {
-    public MethodInfo Method
-    {
-      get; }
+    public MethodInfo Method { get; }
 
     public BinaryExpressionFingerprint( ExpressionType nodeType, Type type, MethodInfo method ) : base(nodeType, type)
     {
       Method = method;
     }
 
-    internal override void AddToHashCodeCombiner( HashCodeCombiner combiner )
-    {
-      combiner.AddObject(Method);
-      base.AddToHashCodeCombiner(combiner);
-    }
-
     public override bool Equals( object obj )
     {
-      BinaryExpressionFingerprint binaryExpressionFingerprint = obj as BinaryExpressionFingerprint;
+      var binaryExpressionFingerprint = obj as BinaryExpressionFingerprint;
       if (binaryExpressionFingerprint == null || !object.Equals(Method, binaryExpressionFingerprint.Method))
       {
         return false;

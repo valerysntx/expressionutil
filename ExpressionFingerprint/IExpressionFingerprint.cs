@@ -1,6 +1,6 @@
 ﻿namespace System.Web.Mvc.ExpressionUtil.ExpressionFingerprint
 {
-  using System.Linq.Expressions;
+  using Linq.Expressions;
 
   /// <summary>
   /// IExpressionFingerprint will contain the 'cached' compiled expression
@@ -12,5 +12,7 @@
 
     bool Equals(object obj);
     int GetHashCode();
+
+    void AddToHashCodeCombiner( IHashCodeCombiner hashCodeCombiner );
   }
 }
