@@ -6,7 +6,6 @@ namespace System.Web.Mvc.ExpressionUtil
   public interface IHashCodeCombiner
   {
     int CombinedHash { get; }
-
     void AddEnumerable( IEnumerable e );
     void AddFingerprint( IExpressionFingerprint fingerprint );
     void AddInt32( int i );

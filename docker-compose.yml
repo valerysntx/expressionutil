@@ -1,0 +1,9 @@
+
+version: "2"
+
+services:
+  expressionutil:
+    image: expressionutil:latest
+    build:
+      context: .
+      dockerfile: Dockerfile

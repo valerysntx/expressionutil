@@ -173,7 +173,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="HashCodeCombiner.cs" />
     <Compile Include="Hoisted_TModel, TValue_.cs" />
-    <Compile Include="HoistingExpressionVisitor.cs" />
     <Compile Include="HoistingExpressionVisitor_TIn, TOut_.cs" />
     <Compile Include="IHashCodeCombiner.cs" />
     <Compile Include="ExpressionFingerprint\Lambda\LambdaExpressionFingerprint.cs" />
